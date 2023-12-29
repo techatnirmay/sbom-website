@@ -1,45 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vulnerability Report Generator</title>
-    <link rel="stylesheet" href="styles.css">
+  <title>SBOM & Vulnerability Report Generator</title>
+  <meta name="description" content="Generate SBOM (Software Bill of Material) and Vulnerability Report for your container image">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #apiForm {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px; /* Adjust the gap to your preference */
+      max-width: 300px; /* Adjust the max-width to your preference */
+      margin: 0 auto; /* Center the form */
+    }
+
+    #apiForm label {
+      flex: 1;
+      margin-right: 10px; /* Adjust the margin to your preference */
+    }
+
+    #apiForm select,
+    #apiForm input,
+    #apiForm button {
+      flex: 2;
+    }
+
+    #apiForm button {
+      align-self: flex-start; /* Align the button to the start (left) */
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Vulnerability Report Generator</h1>
-        <form id="apiForm">
-            <label for="image_name">Image Name:</label>
-            <input type="text" id="image_name" name="image_name" value="rshah/coolstore/inventory" required>
-
-            <label for="image_tag">Image Tag:</label>
-            <input type="text" id="image_tag" name="image_tag" value="latest" required>
-
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="password" required>
-
-            <label for="registry">Registry:</label>
-            <input type="text" id="registry" name="registry" value="quay.io" required>
-
-            <label for="output_format">Output Format:</label>
-            <select id="output_format" name="output_format">
-                <option value="spdx-json" selected>SPDX JSON</option>
-                <!-- Add more options as needed -->
-            </select>
-
-            <label for="onlysbom">Only SBOM:</label>
-            <input type="checkbox" id="onlysbom" name="onlysbom" checked>
-            
-            <button type="button" onclick="submitForm()">Generate Report</button>
-        </form>
-        <div id="loading" style="display: none;">Generating report... Please wait.</div>
-        <div id="result"></div>
-    </div>
-    <script src="script.js"></script>
+  <div class="container" class="square-box">
+    <h1>SBOM and Vulnerability Report Generator</h1>
+    <p>This form allows you to generate a Software Bill of Material (SBOM) and also vulnerability report for your container image.</p>
+    <div id="loading" style="display: none;">Generating report... Please wait.</div>
+    <div id="result"></div>
+    <form id="apiForm" class="square-box">
+      <label for="image_name">Image Name:</label>
+      <input type="text" id="image_name" name="image_name" value="rshah/coolstore/inventory" required>
+      <br>
+      <label for="image_tag">Image Tag:</label>
+      <input type="text" id="image_tag" name="image_tag" value="latest" required>
+      <br>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" value="password" required>
+      <br>
+      <label for="registry">Registry:</label>
+      <input type="text" id="registry" name="registry" value="quay.io" required>
+      <br>
+      <label for="output_format">Output Format:</label>
+      <select id="output_format" name="output_format">
+        <option value="spdx-json" selected>SPDX JSON</option>
+        <!-- Add more options as needed -->
+      </select>
+      <br>
+      <label for="onlysbom">Only SBOM:</label>
+      <input type="checkbox" id="onlysbom" name="onlysbom" checked>
+      <!-- Line break to move the button to the next line -->
+      <br>
+      <button type="button" onclick="submitForm()">Generate Report</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
 </body>
-</html>
 
+</html>
