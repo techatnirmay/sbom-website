@@ -18,8 +18,8 @@ function submitForm() {
 
     // Determine the fetch URL based on the 'onlysbom' checkbox
     const fetchUrl = formData.onlysbom
-        ? 'http://65.2.2.147:5000/generate_sbom'  // Fetch from this URL if onlysbom is checked
-        : 'http://65.2.2.147:5000/generate_vulnerability_report';  // Fetch from this URL if onlysbom is not checked
+        ? 'http://sbomreport.nirmaysystems.com:5000/generate_sbom'  // Fetch from this URL if onlysbom is checked
+        : 'http://sbomreport.nirmaysystems.com:5000/generate_vulnerability_report';  // Fetch from this URL if onlysbom is not checked
 
     fetch(fetchUrl, {
         method: 'POST',
