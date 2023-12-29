@@ -1,71 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SBOM & Vulnerability Report Generator</title>
-  <meta name="description" content="Generate SBOM (Software Bill of Material) and Vulnerability Report for your container image">
-  <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
     #apiForm {
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      gap: 10px; /* Adjust the gap to your preference */
-      max-width: 300px; /* Adjust the max-width to your preference */
-      margin: 0 auto; /* Center the form */
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: 2px solid #333;
+      border-radius: 8px;
     }
 
     #apiForm label {
-      flex: 1;
-      margin-right: 10px; /* Adjust the margin to your preference */
-    }
-
-    #apiForm select,
-    #apiForm input,
-    #apiForm button {
-      flex: 2;
+      width: 100%;
+      text-align: left;
     }
 
     #apiForm button {
-      align-self: flex-start; /* Align the button to the start (left) */
+      align-self: flex-start;
     }
   </style>
 </head>
 
 <body>
-  <div class="container" class="square-box">
+  <div class="container">
     <h1>SBOM and Vulnerability Report Generator</h1>
-    <p>This form allows you to generate a Software Bill of Material (SBOM) and also vulnerability report for your container image.</p>
-    <div id="loading" style="display: none;">Generating report... Please wait.</div>
-    <div id="result"></div>
-    <form id="apiForm" class="square-box">
-      <label for="image_name">Image Name:</label>
-      <input type="text" id="image_name" name="image_name" value="rshah/coolstore/inventory" required>
-      <br>
-      <label for="image_tag">Image Tag:</label>
-      <input type="text" id="image_tag" name="image_tag" value="latest" required>
-      <br>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" value="username" required>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" value="password" required>
-      <br>
-      <label for="registry">Registry:</label>
-      <input type="text" id="registry" name="registry" value="quay.io" required>
-      <br>
-      <label for="output_format">Output Format:</label>
-      <select id="output_format" name="output_format">
-        <option value="spdx-json" selected>SPDX JSON</option>
-        <!-- Add more options as needed -->
-      </select>
-      <br>
-      <label for="onlysbom">Only SBOM:</label>
-      <input type="checkbox" id="onlysbom" name="onlysbom" checked>
-      <!-- Line break to move the button to the next line -->
-      <br>
+    <p>This form allows you to generate a Software Bill of Material (SBOM) and also a vulnerability report for your container image.</p>
+    <form id="apiForm">
+      <label for="image_name">Image Name:
+        <input type="text" id="image_name" name="image_name" value="rshah/coolstore/inventory" required>
+      </label>
+
+      <label for="image_tag">Image Tag:
+        <input type="text" id="image_tag" name="image_tag" value="latest" required>
+      </label>
+
+      <label for="username">Username:
+        <input type="text" id="username" name="username" value="username" required>
+      </label>
+
+      <label for="password">Password:
+        <input type="password" id="password" name="password" value="password" required>
+      </label>
+
+      <label for="registry">Registry:
+        <input type="text" id="registry" name="registry" value="quay.io" required>
+      </label>
+
+      <label for="output_format">Output Format:
+        <select id="output_format" name="output_format">
+          <option value="spdx-json" selected>SPDX JSON</option>
+          <!-- Add more options as needed -->
+        </select>
+      </label>
+
+      <label for="onlysbom">Only SBOM:
+        <input type="checkbox" id="onlysbom" name="onlysbom" checked>
+      </label>
+
       <button type="button" onclick="submitForm()">Generate Report</button>
     </form>
+    <div id="loading" style="display: none;">Generating report... Please wait.</div>
+    <div id="result"></div>
   </div>
   <script src="script.js"></script>
 </body>
